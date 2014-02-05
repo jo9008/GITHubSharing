@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+	<head>
+		<title>GTM - Grand Theft Mod</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body ng-app>
+		<header class="header">
+			<h1>
+				Grand Theft Mod
+				<small>v<span class="version">0.0.0</span></small>
+			</h1>
+			<div class="ip">
+				<div>
+					<label>Primary DNS:</label> <span class="value">225.255.255.255</span>
+				</div>
+				<div>
+					<label>Secondary DNS:</label> <span>8.8.8.8</div>
+				</div>
+			</div>
+		</header>
+
+		<div class="body" ng-controller="MainCtrl">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8">
+						<h3>Multipliers</h3>
+						<div class="row">
+							<div class="col-sm-4">
+								<div>
+									<label>
+										RP 
+										<input type="text" class="form-control" ng-model="tunables.rp" data-toggle="popover" data-content="Suggested maximum value is 1000. If you level too fast try setting it to a negative value (e.g. -500)">
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<label>
+									Cash 
+									<input type="text" class="form-control" ng-model="tunables.cash" data-toggle="popover" data-content="If this value is set too high it might look like you're getting negative cash when you're not.">
+								</label>
+							</div>
+							<div class="col-sm-4">
+								<label>
+									Bounty 
+									<input type="text" class="form-control" ng-model="tunables.bounty" data-toggle="popover" data-content="When you set a bounty it will look like the bounties are negative but they're not.">
+								</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-4">
+								<label>
+									Haircuts 
+									<input type="text" class="form-control" ng-model="tunables.haircuts" data-toggle="popover" data-content="Have too much cash? Increase this multiplier and get an expensive haircut.">
+								</label>
+							</div>
+							<div class="col-sm-4">
+								<label>
+									Weapons Shop
+									<input type="text" class="form-control" ng-model="tunables.weapons" data-toggle="popover" data-content="The cost of ammo is too damn high!">
+								</label>
+							</div>
+							<div class="col-sm-4">
+								<label>
+									Car Mods Shop
+									<input type="text" class="form-control" ng-model="tunables.carmods" data-toggle="popover" data-content="Want a discount on car mods? Try setting a value like 0.1 for 90% discount.">
+								</label>
+							</div>
+						</div>
+
+						<h3>Options</h3>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.snow">
+										Enable snow
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.xmas">
+										Enable xmas content
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.god_mode">
+										Enable god mode
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.idlekick">
+										Disable idlekick
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.cheater">
+										Bypass cheater lobby
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="tunables.bad_sport">
+										Bypass bad sport lobby
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<div class="page-header">
+							<h3>Status</h3>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 save success">
+								<i class="glyphicon glyphicon-ok-circle"></i> Values saved.
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 load-game waiting">
+								<i class="glyphicon glyphicon-record"></i> Detected game loading.
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 load-online waiting">
+								<i class="glyphicon glyphicon-record"></i> Tunables delivered.
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+								<hr>
+							</div>
+							<div class="col-sm-12">
+								<div class="btn-group">
+									<a href="#" class="btn btn-default" ng-click="saveValues()">Save values</a>
+									<a href="#" class="btn btn-default" ng-click="defaultValues()">Reset defaults</a>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<hr>
+								<small>
+									Once you're in game, to quickly confirm the mod is working check if enabling passive mode costs <strong>${{tunables.passive}}</strong>.
+								</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="update-gtm modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">An update is available!</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>It looks like Grand Theft Mod v<span class="new-version"></span> is available.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <a href="#" class="btn btn-primary open-gtadns">Go to GTADNS.com</a>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<script src="js/jquery.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>

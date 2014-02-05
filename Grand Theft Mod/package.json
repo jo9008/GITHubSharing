@@ -1,0 +1,12 @@
+{
+	"name": "Grand Theft Mod",
+	"main": "index.html",
+	"version": "0.0.1",
+	"window": {
+		"icon": "images/gtm_64x64.png",
+		"show": false,
+		"toolbar": false,
+		"resizable": false,
+		"width": 768
+	}
+}
